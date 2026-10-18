@@ -9,7 +9,7 @@
   echo '127.0.0.1 SystemdSandbox SystemdSandbox.home.arpa' | tee -a /etc/hosts
 
 # Poner todos los repositorios
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
+  curl -sL https://raw.githubusercontent.com/nipegun/debian-scripts/refs/heads/main/PostInstDebian/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
 
 # x
   apt-get -y update
@@ -39,7 +39,7 @@
   apt-get -y install mc
 
 # Preparar debian CLI
-  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/0-PrepararDebianCLI.sh | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/debian-scripts/refs/heads/main/PostInstDebian/CLI/0-PrepararDebianCLI.sh | bash
 
 # Entrar en la carpeta montada del host
   cd /mnt/host/
