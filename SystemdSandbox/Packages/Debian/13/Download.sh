@@ -3,8 +3,16 @@
 # Ejecución remota:
 #  curl -sL https://raw.githubusercontent.com/nipegun/hacking-resources/refs/heads/main/SystemdSandbox/Packages/Debian/13/Download.sh | bash
 
-# Instalar dependencias
+# Actualizar la lista de paquetes disponibles en los repositorios
+  echo ""
+  echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+  echo ""
   sudo apt-get -y update
+
+# Instalar dependencias
+  echo ""
+  echo "  Instalando dependencias..."
+  echo ""
   sudo apt-get -y install curl systemd-container tar
 
 # Descargar partes del contenedor de Debian
@@ -46,3 +54,4 @@
   echo ""
   echo "    La contraseña del root es 'raizraiz'."
   echo ""
+
