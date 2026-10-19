@@ -72,10 +72,13 @@
   echo ""
   echo "      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombreHost/ --boot"
   echo ""
-  echo "    Si quieres que también acceda a una carpeta del host:"
+  echo "    Si quieres que el contenedor monte una carpeta del host al iniciar, bootealo con:"
   echo ""
   echo "      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombreHost/ --bind='/home/user/Escritorio:/mnt/host' --boot"
   echo ""
   echo "    La contraseña del root es 'raizraiz'."
   echo ""
-
+  echo "    Tienes los siguientes contendores de systemd en /var/lib/machines/"
+  echo ""
+  ls -l /var/lib/machines/
+  echo ""
