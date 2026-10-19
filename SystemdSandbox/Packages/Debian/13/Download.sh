@@ -13,7 +13,10 @@
   echo ""
   echo "  Instalando dependencias..."
   echo ""
-  sudo apt-get -y install curl systemd-container tar
+  sudo apt-get -y install curl systemd-container tar dialog
+
+# Preguntar el nombre del contenedor
+  vNuevoNombreHost=$(dialog --stdout --title "Nombre del contenedor" --inputbox "Introduce el nombre (sin usar espacios):" 8 50)
 
 # Descargar partes del contenedor de Debian
   echo ""
@@ -31,18 +34,15 @@
   echo ""
   echo "  Descomprimiendo a su ubicación final..."
   echo ""
+  sudo rm -rf /var/lib/machines/base-debian-13/
   cat /tmp/base-debian-13.tar.xz.part-* | sudo tar --acls --xattrs --xattrs-include='*' --sparse --numeric-owner --same-owner --same-permissions -xJvf - -C /var/lib/machines/
+  sudo mv /var/lib/machines/base-debian-13/ /var/lib/machines/$vNuevoNombreHost/
+  sudo sed -i -e "s|base-debian-13|$vNuevoNombreHost|g" /var/lib/machines/$vNuevoNombreHost/etc/hostname
+  sudo sed -i -e "s|base-debian-13|$vNuevoNombreHost|g" /var/lib/machines/$vNuevoNombreHost/etc/hosts
 
 # Notificar fin de ejecución
   echo ""
   echo "  Contenedor de Debian 13 descargado y descomprimido en /var/lib/machines/base-debian-13/"
-  echo ""
-  echo "    Para renombrarlo, ejecuta:"
-  echo ""
-  echo "      vNuevoNombre='DebianPruebas'"
-  echo '      sudo sed -i -e "s|base-debian-13|$vNuevoNombre|g" /var/lib/machines/base-debian-13/etc/hostname'
-  echo '      sudo sed -i -e "s|base-debian-13|$vNuevoNombre|g" /var/lib/machines/base-debian-13/etc/hosts'
-  echo '      sudo mv -fv /var/lib/machines/base-debian-13/ /var/lib/machines/$vNuevoNombre/'
   echo ""
   echo "    Para bootearlo, ejecuta:"
   echo ""
