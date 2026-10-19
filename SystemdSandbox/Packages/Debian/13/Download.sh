@@ -80,5 +80,6 @@
   echo ""
   echo "    Tienes los siguientes contendores de systemd en /var/lib/machines/"
   echo ""
-  sudo ls -l /var/lib/machines/ | awk '{print $9}'
+  #sudo ls -l /var/lib/machines/ | awk '{print $9}'
+  sudo find /var/lib/machines/ -mindepth 1 -maxdepth 1 -type d -printf '%f\n'
   echo ""
