@@ -16,7 +16,31 @@
   sudo apt-get -y install curl systemd-container tar dialog
 
 # Preguntar el nombre del contenedor
-  vNuevoNombreHost=$(dialog --stdout --title "Nombre del contenedor" --inputbox "Introduce el nombre (sin usar espacios):" 8 50)
+  vEstado=0
+  vNuevoNombreHost=$(dialog --stdout --input-fd 3 --title "Nombre del contenedor" --inputbox "Introduce el nombre (sin usar espacios):" 8 50 3</dev/tty) || vEstado=$?
+
+  # Si el usuario cancela, utilizar SinNombre
+  if [ "$vEstado" -ne 0 ]; then
+    vNuevoNombreHost="SinNombre"
+  fi
+
+  # Validar el nombre del contenedor
+  if [[ ! "$vNuevoNombreHost" =~ ^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$ ]]; then
+    echo "Error: el nombre debe contener entre 1 y 63 caracteres, únicamente letras, números y guiones, sin comenzar ni terminar con un guion."
+    exit 1
+  fi
+
+  # Impedir utilizar el nombre reservado del contenedor original
+  if [ "$vNuevoNombreHost" = "base-debian-13" ]; then
+    echo "Error: el nombre base-debian-13 está reservado."
+    exit 1
+  fi
+
+  # Comprobar que no exista otro contenedor con ese nombre
+  if [ -e "/var/lib/machines/$vNuevoNombreHost" ] || [ -L "/var/lib/machines/$vNuevoNombreHost" ]; then
+    echo "Error: ya existe un contenedor llamado $vNuevoNombreHost."
+    exit 1
+  fi
 
 # Descargar partes del contenedor de Debian
   echo ""
