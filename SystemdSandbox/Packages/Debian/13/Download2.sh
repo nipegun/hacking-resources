@@ -66,15 +66,15 @@
 
 # Notificar fin de ejecución
   echo ""
-  echo "  Contenedor de Debian 13 descargado y descomprimido en /var/lib/machines/base-debian-13/"
+  echo "  Contenedor de Debian 13 descargado y descomprimido en /var/lib/machines/$vNuevoNombreHost/"
   echo ""
   echo "    Para bootearlo, ejecuta:"
   echo ""
-  echo '      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombre/ --boot'
+  echo "      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombreHost/ --boot"
   echo ""
   echo "    Si quieres que también acceda a una carpeta del host:"
   echo ""
-  echo '      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombre/ --bind="/home/nipegun/Escritorio/Code:/mnt/host" --boot'
+  echo "      sudo systemd-nspawn -U -D /var/lib/machines/$vNuevoNombreHost/ --bind='/home/user/Escritorio:/mnt/host' --boot"
   echo ""
   echo "    La contraseña del root es 'raizraiz'."
   echo ""
