@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/hacking-resources/refs/heads/main/SystemdSandbox/Packages/Debian/13/Download.sh | bash
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/hacking-resources/refs/heads/main/SystemdSandbox/Packages/Debian/13/Download.sh | sed 's-sudo--g' | bash
 
 # Actualizar la lista de paquetes disponibles en los repositorios
   echo ""
